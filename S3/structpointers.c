@@ -27,13 +27,11 @@ double getPrice(product_t prod){
  * @return: a string on the heap that contains the name of the product ptrProd or NULL if an error happens
  */
 char* getPtrName(product_t *ptrProd){
-    char str[strlen(ptrProd->name)];
-	char * name;
-	name = (char*) malloc(sizeof(struct product));
-	if (name != NULL){
-		name = ptrProd->name;
-	}
-	return name;
+    char *dest = (char *) malloc(strlen(ptrProd->name) + 1); // +1 pour le '\0'
+    if (dest != NULL){
+        strcpy(dest,ptrProd->name);
+    }
+    return dest;
 }
 	
 
@@ -42,7 +40,11 @@ char* getPtrName(product_t *ptrProd){
  * @return: a string on the heap that contains the name of the product ptrProd or NULL if an error happens
  */
 char* getName(product_t prod){
-	return prod.name;
+	char * dest = (char *) malloc(strlen(prod.name) + 1);
+	if (dest != NULL){
+	    strcpy(dest,prod.name);
+	}
+	return dest;
 }
 
 /*
@@ -52,8 +54,7 @@ char* getName(product_t prod){
  * @return: 1 if the two products are the same, i.e., they have the same price and the same name
  */
 int prodEquals(product_t *ptrProd, product_t prod){
-	if ((getPtrPrice(ptrProd) == getPrice(prod)) && (getPtrName(ptrProd) == getName(prod))){
-		return 1;
-	}
-	return 0;
+	int same_price = getPtrPrice(ptrProd) == getPrice(prod);
+    int same_name = !strcmp(ptrProd->name,prod.name);
+    return same_price && same_name;
 }
