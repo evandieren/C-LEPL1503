@@ -28,28 +28,17 @@ struct node {
  * @return: pointer to the filtered linked list, return NULL if error or if head == NULL
  */
 struct node *pair_filter(struct node *head) {
-    if (!head){return NULL};
-    size_t size = sizeof(struct node);
-    struct node  * newHead = (struct node *) malloc(size);
-    if (!newHead){return NULL;}
-    memcpy(newHead, head, size);
+    if (head==NULL)
+    return NULL;
 
-    if (!(head->next)||!(head->next->next)){
-        newHead->next = NULL;
-        return newHead;
-    }
+    struct node *nHead = malloc(sizeof(struct node));
 
-    struct node* nextNode = newHead; // Pointer to the nextNode
-    struct node* current = head->next->next; // Goes through the LL
-    while(true){
-        nextNode->next = (struct node*) malloc(size);
-        if (!nextNode->next){return NULL;}
-        memcpy(nextNode->next,current,size);
-        nextNode = nextNode->next;
-        if (!runner->next || !runner->next->next){
-            break;
-        }
+    if (!nHead){
+        return NULL;
     }
-    nextNode = NULL;
-    return newHead;
+    memcpy(nHead,head,sizeof(struct node));
+    if (head -> next != NULL){
+        nHead->next = pair_filter(head->next->next);
+    }
+    return nHead;
 }
