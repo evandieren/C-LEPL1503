@@ -28,22 +28,14 @@ typedef struct node{
 */
 int insert(node_t **head, char val, int (*cmp)(char,char)) {
     // EMPTY LIST
-    if(!*head){
-        node_t* n = (node_t*) malloc(sizeof(node_t));
-        if(n == NULL) {return -1;}
-        n->val = val;
-        n->next = NULL;
-        *head = n;
-        return 0;
-    }
 
     node_t * runner = *head;
     node_t * previous = *head;
 
     // 1 ELEMENT
     int gol = (*cmp)(val,runner->val);
-    if (gol <= 0){
-        if (gol == 0){return 0;}
+    if (gol == 0){return 0;} //car les if imbrique c'est sale
+    if (gol < 0){
         node_t * newNode = (node_t *) malloc(sizeof(node_t));
         if (newNode == NULL){return -1;}
         newNode->val = val;
