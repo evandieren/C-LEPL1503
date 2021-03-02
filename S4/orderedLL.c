@@ -28,7 +28,15 @@ typedef struct node{
 */
 int insert(node_t **head, char val, int (*cmp)(char,char)) {
     // EMPTY LIST
-
+        //suite au bug avec les nouvelles soumissions
+     if(!*head){
+        node_t* newnode = (node_t*) malloc(sizeof(node_t));
+        if(newnode == NULL) {return -1;}
+        newnode->val = val;
+        newnode->next = NULL;
+        *head = newnode;
+        return 0;
+    }
     node_t * runner = *head;
     node_t * previous = *head;
 
