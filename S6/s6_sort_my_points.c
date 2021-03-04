@@ -10,7 +10,7 @@ return(((int )(((points_t *)s1)->average*1000))-((int )(((points_t *)s2)->averag
 /*
 
 
-Question 2
+Question 2 (aka tout ça pour ça )
 
 */
 
